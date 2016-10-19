@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="akka-2.4">
+    <CLASSES>
+      <root url="file://$USER_HOME$/scala/lib/akka-2.4.11" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

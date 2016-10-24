@@ -1,5 +1,5 @@
 
-import java.io.PrintStream
+import java.io.{BufferedReader, InputStreamReader, PrintStream}
 import java.net.{InetAddress, Socket}
 
 import scala.io.BufferedSource
@@ -12,30 +12,33 @@ object ScalaApp {
 
   def main(args: Array[String]): Unit = {
     val socket = new Socket(InetAddress.getByName("localhost"), 9999)
-    lazy val in = new BufferedSource(socket.getInputStream()).getLines()
-    val out = new PrintStream(socket.getOutputStream())
+    println("connected to " + socket.getInetAddress.getHostAddress + "/" + socket.getPort + "...")
 
-//    out.println("Hello, world")
-//    out.flush()
-//    println("Received: " + in.next())
-//    s.close()
+
+//    lazy val in = new BufferedReader(new InputStreamReader(socket.getInputStream))
+    lazy val in = new BufferedSource(socket.getInputStream()).getLines()
+    val streamOut = new PrintStream(socket.getOutputStream())
 
     breakable {
       for (ln <- io.Source.stdin.getLines) {
 
-        out.println(ln)
-        out.flush()
+        if(ln.length != 0) {
+          streamOut.println(ln)
+          streamOut.flush()
 
-        if (ln == "stop") {
-          println("Closing connection")
-          socket.close()
-          break
+          if (ln == "/stop") {
+            println("Closing connection")
+            socket.close()
+            break
+          }
+
+          val size = in.next().toInt
+
+          for (i <- 1 to size) {
+            println(in.next())
+          }
         }
-
-
-        println("Received: " + in.next())
       }
     }
   }
-
 }

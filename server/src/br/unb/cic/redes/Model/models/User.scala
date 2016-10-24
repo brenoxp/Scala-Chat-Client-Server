@@ -19,7 +19,8 @@ case class User(var nickname: String, socket: Socket) {
   /* Connection Methods */
   def receiveMessage(message: Message) = Manager.receiveMessage(message)
   def sendMessage(message: Message) = connectionActor ! message
-  def stopConnection = connectionActor ! Messages.stop_connection
+
+  // def stopConnection = connectionActor ! Messages.stop_connection
 }
 
 
@@ -31,6 +32,8 @@ class Connection(socket: Socket, user: User) extends Actor {
   private val listenerConnectionThread = createConnectionThread
   listenerConnectionThread.start()
 
+  Manager.welcomeHelp(Message("/welcome", user))
+
   private def createConnectionThread = {
     new Thread(new Runnable {
       def run() {
@@ -39,8 +42,8 @@ class Connection(socket: Socket, user: User) extends Actor {
             val in = bufferedSource.getLines()
             val res = in.next()
 
-            if(res == "/stop") {
-              stopConnectionThread
+            if(res == "/leave") {
+              stopConnectionThread()
               break
             }
 
@@ -51,13 +54,17 @@ class Connection(socket: Socket, user: User) extends Actor {
     })
   }
 
-
-  private def stopConnectionThread:Unit = {
+  private def stopConnectionThread():Unit = {
     socket.close()
     listenerConnectionThread.interrupt()
   }
 
   def receive = {
-    case Message(message, a) => out.println(Message.prepareForClient(message))
+    case Message(message, a) => sendMessage(Message(message))
   }
+
+  private def sendMessage(message: Message) = {
+    out.println(Message.prepareForClient(message.message))
+  }
+
 }

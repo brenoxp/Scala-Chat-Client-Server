@@ -22,8 +22,8 @@ object Main {
         val socket = server.accept()
 
         val user = new User(socket.hashCode().toString, socket)
+        Manager.addUser(user)
 
-//        Manager.addUser(user)
       }
     } catch {
       case e: Exception => e.printStackTrace()

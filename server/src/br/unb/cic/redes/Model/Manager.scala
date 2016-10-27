@@ -2,8 +2,9 @@ package br.unb.cic.redes.Model
 
 import br.unb.cic.redes.Model.models.User
 import br.unb.cic.redes.Model.models.Message
+import br.unb.cic.redes.Model.models.Group
 
-import scala.collection.mutable
+import scala.collection.mutable.{ListBuffer, MutableList}
 
 /**
   * Created by @brenoxp on 19/10/16.
@@ -12,13 +13,16 @@ object Manager {
 
   private val MOTD = "Welcome to Scala Chat \nA nice place to meet people!"
 
-  private val users = mutable.MutableList[User]()
+  private val users = ListBuffer[User]()
+  private val groups = ListBuffer[Group]()
 
 
   /* Methods */
-
   def addUser(user: User) = users += user
-  def removeUser(user: User) = ???
+  def removeUser(user: User) = users -= user
+
+  private def addGroup(group: Group) = groups += group
+  private def removeGroup(group: Group) = groups -= group
 
   def receiveMessage(message: Message): Unit = {
     val m = message.message.split(" ")
@@ -30,8 +34,8 @@ object Manager {
       case "/nick" => if (m.length <= 2) nick(message) else unrecognizedCommand(message)
       case "/leave" => ()
       case "/join grupo" => ()
-      case "/create grupo" => ()
-      case "/delete grupo" => ()
+      case "/create" => if (m.length == 2) create(message) else unrecognizedCommand(message)
+      case "/delete" => if (m.length == 2) delete(message) else unrecognizedCommand(message)
       case "/away" => ()
       case "/msg nick mensagem" => ()
       case "/ban nick" => ()
@@ -45,8 +49,6 @@ object Manager {
   def sendMessage(message: Message, text: String) = message.user.sendMessage(Message(text))
   def unrecognizedCommand(message: Message) =
     message.user.sendMessage(Message("Unrecognized command: \"" + message.message + "\""))
-
-
 
   private def help(message: Message) = {
     sendMessage(message, helpAux)
@@ -79,7 +81,6 @@ object Manager {
       "------------------------------------------"
   }
 
-
   private def nick(message: Message) = {
     val split = message.message.split(" ")
 
@@ -87,24 +88,48 @@ object Manager {
     else changeNick(message)
 
     def printNick(message: Message) = {
-      sendMessage(message, message.user.nickname)
+      sendMessage(message, "Nickname: " + message.user.nickname)
     }
 
     def changeNick(message: Message) = {
       val newNick = message.message.split(" ")(1)
-      if (users.exists(user => user.nickname == newNick)) {
-        sendMessage(message, "Nickname em uso")
-      } else {
+
+      if (newNick.length > 50) sendMessage(message, "Nickname deve ter até 50 caracteres")
+      else if (users.exists(user => user.nickname == newNick)) sendMessage(message, "Nickname em uso")
+      else {
         message.user.nickname = newNick
         sendMessage(message, "Nickname alterado")
       }
     }
   }
 
-  def createGroup = {
+  private def create(message: Message) = {
+    val split = message.message.split(" ")
+
+    val groupName = split(1)
+    if (groupName.length > 50) sendMessage(message, "Nome do grupo deve ter até 50 caracteres")
+    else if(groups.exists(group => group.groupName == groupName)) sendMessage(message, "Nome do grupo em uso")
+    else {
+      val group = Group(message.user, groupName)
+      addGroup(group)
+      message.user.addGroup(group)
+      sendMessage(message, groupName + " criado com sucesso.")
+    }
   }
 
+  def delete(message: Message) = {
+    val groupName = message.message.split(" ")(1)
+    val groupToRemove = groups.filter(group => group.groupName == groupName).head
 
+    if (groupToRemove == null) sendMessage(message, "Grupo não existe")
+    else if (!groupToRemove.canBeRemoved) {
+      sendMessage(message, "Grupo não pode ser removido")
+    } else {
+      removeGroup(groupToRemove)
+      message.user.removeGroup(groupToRemove)
+      sendMessage(message, "Grupo removido com sucesso")
+    }
+  }
 
 
 }

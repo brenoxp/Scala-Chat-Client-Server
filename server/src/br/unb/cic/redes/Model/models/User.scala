@@ -4,8 +4,9 @@ import java.io.PrintStream
 import java.net.Socket
 
 import akka.actor.{Actor, Props}
-import br.unb.cic.redes.Model.{Main, Messages, Manager}
+import br.unb.cic.redes.Model.{Main, Manager, Messages}
 
+import scala.collection.mutable.ListBuffer
 import scala.io.BufferedSource
 import scala.util.control.Breaks._
 
@@ -15,6 +16,12 @@ import scala.util.control.Breaks._
 case class User(var nickname: String, socket: Socket) {
 
   private val connectionActor = Main.system.actorOf(Props(new Connection(socket, this)))
+
+  /* Groups */
+  private val groups = ListBuffer[Group]()
+
+  def addGroup(group: Group) = groups += group
+  def removeGroup(group: Group) = groups -= group
 
   /* Connection Methods */
   def receiveMessage(message: Message) = Manager.receiveMessage(message)
@@ -43,6 +50,7 @@ class Connection(socket: Socket, user: User) extends Actor {
             val res = in.next()
 
             if(res == "/leave") {
+              Manager.removeUser(user)
               stopConnectionThread()
               break
             }

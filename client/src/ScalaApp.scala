@@ -1,6 +1,6 @@
 
 import java.io.{BufferedReader, InputStreamReader, PrintStream}
-import java.net.{InetAddress, Socket}
+import java.net.{InetAddress, Socket, SocketException}
 
 import scala.io.BufferedSource
 import util.control.Breaks._
@@ -17,7 +17,24 @@ object ScalaApp {
     lazy val in = new BufferedSource(socket.getInputStream()).getLines()
     val streamOut = new PrintStream(socket.getOutputStream())
 
-    printMessage(in)
+
+    val connectionThread =
+      new Thread(new Runnable {
+        def run() {
+          breakable {
+            while (true) {
+              if (socket.isClosed) break()
+              printMessage(in)
+            }
+          }
+        }
+      })
+    connectionThread.start()
+
+    def stopConnectionThread() = {
+      socket.close()
+      connectionThread.interrupt()
+    }
 
     breakable {
       for (ln <- io.Source.stdin.getLines) {
@@ -25,31 +42,32 @@ object ScalaApp {
         if(ln.length != 0) {
           streamOut.println(ln)
           streamOut.flush()
-
-          if (ln == "/leave") {
-            println("Closing connection...")
-            socket.close()
-            break
-          }
-
-          printMessage(in)
         }
       }
     }
 
 
+
+
+
   }
 
   def printMessage(in: Iterator[String]) = {
-    val size = in.next().toInt
 
-    if (size == 1) {
-      val message = in.next()
-      if (message != "ok") println(message)
-    } else {
-      for (i <- 1 to size) {
-        println(in.next())
+    try {
+      val size = in.next().toInt
+
+      if (size == 1) {
+        val message = in.next()
+        if (message != "ok") println(message)
+      } else {
+        for (i <- 1 to size) {
+          println(in.next())
+        }
       }
+    } catch  {
+      case se :SocketException => ()
+      case e  :Exception => e.printStackTrace()
     }
 
     println()

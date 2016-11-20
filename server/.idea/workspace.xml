@@ -34,8 +34,8 @@
       <file leaf-file-name="User.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/br/unb/cic/redes/Model/models/User.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+            <state relative-caret-position="124">
+              <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
               <folding>
                 <element signature="e#39#65#0" expanded="true" />
               </folding>
@@ -56,16 +56,15 @@
       <file leaf-file-name="Manager.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/br/unb/cic/redes/Model/Manager.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="155" column="52" selection-start-line="155" selection-start-column="52" selection-end-line="155" selection-end-column="52" />
+            <state relative-caret-position="537">
+              <caret line="163" column="3" selection-start-line="163" selection-start-column="3" selection-end-line="163" selection-end-column="3" />
               <folding>
                 <element signature="e#32#73#0" expanded="true" />
-                <element signature="e#1938#2014#0" expanded="false" />
-                <element signature="e#2018#2182#0" expanded="false" />
-                <element signature="e#2208#3606#0" expanded="false" />
-                <element signature="e#3610#4287#0" expanded="false" />
-                <element signature="e#4291#4802#0" expanded="false" />
-                <element signature="e#4806#5304#0" expanded="false" />
+                <element signature="e#1888#1964#0" expanded="false" />
+                <element signature="e#1968#2132#0" expanded="false" />
+                <element signature="e#2158#3556#0" expanded="false" />
+                <element signature="e#3560#4237#0" expanded="false" />
+                <element signature="e#4830#5328#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -625,12 +624,12 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32917964" sideWeight="0.49672592" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3242655" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3236212" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32917964" sideWeight="0.5070159" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296371" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27783558" sideWeight="0.49672592" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27783558" sideWeight="0.49672592" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32832617" sideWeight="0.4929841" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22827224" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -660,7 +659,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="14" />
+      <option name="time" value="19" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -703,12 +702,11 @@
           <caret line="129" column="56" selection-start-line="129" selection-start-column="56" selection-end-line="129" selection-end-column="56" />
           <folding>
             <element signature="e#32#73#0" expanded="true" />
-            <element signature="e#1938#2014#0" expanded="false" />
-            <element signature="e#2018#2182#0" expanded="false" />
-            <element signature="e#2208#3606#0" expanded="false" />
-            <element signature="e#3610#4287#0" expanded="false" />
-            <element signature="e#4291#4802#0" expanded="false" />
-            <element signature="e#4806#5304#0" expanded="false" />
+            <element signature="e#1888#1964#0" expanded="false" />
+            <element signature="e#1968#2132#0" expanded="false" />
+            <element signature="e#2158#3556#0" expanded="false" />
+            <element signature="e#3560#4237#0" expanded="false" />
+            <element signature="e#4830#5328#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -913,16 +911,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/br/unb/cic/redes/Model/models/User.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-          <folding>
-            <element signature="e#39#65#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/br/unb/cic/redes/Model/models/Message.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -931,18 +919,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/br/unb/cic/redes/Model/models/User.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="124">
+          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding>
+            <element signature="e#39#65#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/br/unb/cic/redes/Model/Manager.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="155" column="52" selection-start-line="155" selection-start-column="52" selection-end-line="155" selection-end-column="52" />
+        <state relative-caret-position="537">
+          <caret line="163" column="3" selection-start-line="163" selection-start-column="3" selection-end-line="163" selection-end-column="3" />
           <folding>
             <element signature="e#32#73#0" expanded="true" />
-            <element signature="e#1938#2014#0" expanded="false" />
-            <element signature="e#2018#2182#0" expanded="false" />
-            <element signature="e#2208#3606#0" expanded="false" />
-            <element signature="e#3610#4287#0" expanded="false" />
-            <element signature="e#4291#4802#0" expanded="false" />
-            <element signature="e#4806#5304#0" expanded="false" />
+            <element signature="e#1888#1964#0" expanded="false" />
+            <element signature="e#1968#2132#0" expanded="false" />
+            <element signature="e#2158#3556#0" expanded="false" />
+            <element signature="e#3560#4237#0" expanded="false" />
+            <element signature="e#4830#5328#0" expanded="false" />
           </folding>
         </state>
       </provider>

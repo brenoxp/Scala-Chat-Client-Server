@@ -3,7 +3,6 @@ package br.unb.cic.redes.Model
 import br.unb.cic.redes.Model.models.User
 import br.unb.cic.redes.Model.models.Message
 import br.unb.cic.redes.Model.models.Group
-import br.unb.cic.redes.Model.models.Status
 
 import scala.collection.mutable.{ListBuffer, MutableList}
 
@@ -34,7 +33,7 @@ object Manager {
       case "/help" => if (m.length == 1) help(msg) else unrecognizedCommand(msg)
       case "/nick" => if (m.length <= 2) nick(msg) else unrecognizedCommand(msg)
       case "/leave" => unrecognizedCommand(msg)
-      case "/join grupo" => if (m.length == 2) join(msg) else unrecognizedCommand(msg)
+      case "/join" => if (m.length == 2) join(msg) else unrecognizedCommand(msg)
       case "/create" => if (m.length == 2) create(msg) else unrecognizedCommand(msg)
       case "/delete" => if (m.length == 2) delete(msg) else unrecognizedCommand(msg)
       case "/list" => if (m.length == 1) list(msg) else unrecognizedCommand(msg)
@@ -115,7 +114,8 @@ object Manager {
       val group = Group(message.user, groupName)
       addGroup(group)
       message.user.addGroup(group)
-      sendMessage(message, groupName + " criado com sucesso.")
+      message.user.currentGroup = group
+      sendMessage(message, groupName + " criado com sucesso.\nVocê está no grupo: " + groupName)
     }
   }
 
@@ -135,28 +135,31 @@ object Manager {
 
   def list(message: Message) = {
 
-    val status = message.user.status
+    val currentGroup = message.user.currentGroup
 
-    status match {
-      case Status.home => {
-        var groupNames = ""
-        groups.foreach(group => groupNames += group.groupName + "\n")
-        sendMessage(message, groupNames.substring(0, groupNames.length - 1))
-      }
-      case Status.group => {
-        //TODO: mostrar pessoas dentro do grupo
-      }
+    if (currentGroup == null) {
+      var groupNames = "Grupos Cadastrados:\n"
+      groups.foreach(group => groupNames += group.groupName + "\n")
+      sendMessage(message, groupNames.substring(0, groupNames.length - 1))
+    } else {
+      var userNames = "Usuários Cadastrados:\n"
+      //TODO: mostrar pessoas dentro do grupo
     }
   }
 
   def join(message: Message) = {
-    val split = message.message.split(" ")
-
-    val groupName = split(1)
-    if (groups.exists(group => group.groupName == groupName)) {
-      sendMessage(message, "Grupo existe")
+    if (message.user.currentGroup != null) {
+      sendMessage(message, "Para entrar em outro grupo primeiro deve sair deste")
     } else {
-      sendMessage(message, "Grupo fora de uso")
+      val split = message.message.split(" ")
+
+      val groupName = split(1)
+      if (groups.exists(group => group.groupName == groupName)) {
+        message.user.currentGroup = groups.filter(group => group.groupName == groupName)(0)
+        sendMessage(message, "Você está no grupo: " + groupName)
+      } else {
+        sendMessage(message, "Não existe grupo com este nome")
+      }
     }
   }
 

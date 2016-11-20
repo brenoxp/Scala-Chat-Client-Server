@@ -17,7 +17,7 @@ case class Group(admin: User, groupName: String) {
   def addPerson(user: User) = users += user
   def removePerson(user: User) = users = users.filterNot(mUser => mUser.nickname == user.nickname)
 
-  def canBeRemoved = if (users.length == 1) true else false
+  def canBeRemoved = if (users.length == 0) true else false
 
   def getUsers: mutable.MutableList[User] = users
 }

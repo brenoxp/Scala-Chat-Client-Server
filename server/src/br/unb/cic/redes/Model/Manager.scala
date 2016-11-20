@@ -49,7 +49,7 @@ object Manager {
 
   def sendMessage(message: Message, text: String) = message.user.sendMessage(Message(text))
   def unrecognizedCommand(message: Message) =
-    message.user.sendMessage(Message("Unrecognized command: \"" + message.message + "\""))
+    message.user.sendMessage(Message("Comando não reconhecido: \"" + message.message + "\""))
 
   private def help(message: Message) = {
     sendMessage(message, helpAux)
@@ -121,14 +121,19 @@ object Manager {
 
   def delete(message: Message) = {
     val groupName = message.message.split(" ")(1)
-    val groupToRemove = groups.filter(group => group.groupName == groupName).head
+    val groupListToRemove = groups.filter(group => group.groupName == groupName)
 
-    if (groupToRemove == null) sendMessage(message, "Grupo não existe")
-    else if (!groupToRemove.canBeRemoved) {
-      sendMessage(message, "Grupo não pode ser removido")
+    if (groupListToRemove.length == 0) {
+      sendMessage(message, "Grupo não existe")
+    } else if (!groupListToRemove.head.canBeRemoved) {
+      if (groupListToRemove.head.admin != message.user) {
+        sendMessage(message, "Somente o administrador pode remover o grupo")
+      } else {
+        sendMessage(message, "Grupo contém usuários ativos e não pode ser removido")
+      }
     } else {
-      removeGroup(groupToRemove)
-      message.user.removeGroup(groupToRemove)
+      removeGroup(groupListToRemove.head)
+      message.user.removeGroup(groupListToRemove.head)
       sendMessage(message, "Grupo removido com sucesso")
     }
   }
@@ -171,6 +176,7 @@ object Manager {
     if (currentGroup == null) {
       // Leave chat
       sendMessage(message, "Saindo...")
+      //TODO: Sair do programa
     } else {
       // Leave group
       message.user.currentGroup = null

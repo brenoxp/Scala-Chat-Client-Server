@@ -40,8 +40,7 @@ object Manager {
       case "/away" => if (m.length == 1) away(msg) else unrecognizedCommand(msg)
       case "/msg" => gMsg(msg)
       case "/ban" => if (m.length == 2) ban(msg) else unrecognizedCommand(msg)
-      case "/kick nick" => unrecognizedCommand(msg)
-      case "/clear" => unrecognizedCommand(msg)
+      case "/kick" => if (m.length == 2) kick(msg) else unrecognizedCommand(msg)
       case _: String => unrecognizedCommand(msg)
     }
 
@@ -169,6 +168,8 @@ object Manager {
           message.user.currentGroup = group
           message.user.currentGroup.addPerson(message.user)
           sendMessage(message, "Você está no grupo: " + groupName)
+
+          group.sendMessage(message.user.nickname + " entrou no grupo")
         }
 
       } else {
@@ -240,11 +241,39 @@ object Manager {
           val user = group.getUser(banUserName)
           user.removeGroup(group)
           user.away = false
-          user.sendMessage(Message("Você foi bonido do grupo"))
+          user.sendMessage(Message("Você foi banido do grupo"))
           user.currentGroup = null
           group.banUser(user)
 
           sendMessage(message, user.nickname + " banido com sucessso")
+        }
+      }
+
+    } else {
+      sendMessage(message, "Você deve pertencer a algum grupo para executar este comando")
+    }
+  }
+
+  def kick(message: Message) = {
+    val group = message.user.currentGroup
+    if (group != null) {
+      val split = message.message.split(" ")
+      val banUserName = split(1)
+
+      if (group.admin != message.user) {
+        sendMessage(message, "Somente o administrador pode remover um usuário")
+      } else {
+
+        if (!group.userExist(banUserName)) {
+          sendMessage(message, "Usuário não existe no grupo")
+        } else {
+          val user = group.getUser(banUserName)
+          user.removeGroup(group)
+          user.away = false
+          user.sendMessage(Message("Você foi removido do grupo"))
+          user.currentGroup = null
+
+          sendMessage(message, user.nickname + " removido com sucessso")
         }
       }
 

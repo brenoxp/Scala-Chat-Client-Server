@@ -38,10 +38,10 @@ object Manager {
       case "/delete" => if (m.length == 2) delete(msg) else unrecognizedCommand(msg)
       case "/list" => if (m.length == 1) list(msg) else unrecognizedCommand(msg)
       case "/away" => if (m.length == 1) away(msg) else unrecognizedCommand(msg)
-      case "/msg" => gMsg(msg)
+      case "/msg" => pMsg(msg)
       case "/ban" => if (m.length == 2) ban(msg) else unrecognizedCommand(msg)
       case "/kick" => if (m.length == 2) kick(msg) else unrecognizedCommand(msg)
-      case _: String => unrecognizedCommand(msg)
+      case _: String => gMsg(msg)
     }
 
   }
@@ -74,6 +74,7 @@ object Manager {
       "/away ---------------------- Informa que o usuário está temporariamente indisponível\n" +
       "/msg nick messagem --------- Envia uma mensagem privada a um usuário descrito por nick\n" +
       "/ban nick ------------------ Expulsa o usuário temporariamente do grupo\n" +
+      "/kick nick ----------------- Desconecta o usuário especificado pelo parâmetro nick do grupo em questão.\n" +
       "/clear --------------------- Limpa todas as mensagens da tela\n" +
       "/file caminho_para_arquivo - Envia arquivo ao grupo\n" +
       "/list_files ---------------- Lista todos os arquivos disponíveis no grupo\n" +
@@ -203,12 +204,12 @@ object Manager {
     }
   }
 
-  def gMsg(message: Message) = {
+  def pMsg(message: Message) = {
     val group = message.user.currentGroup
     if (group != null) {
       val split = message.message.split(" ")
       val destUserName = split(1)
-      val sendMessageText = split(2)
+      val sendMessageText = split.tail.tail.mkString(" ")
 
       if (!group.userExist(destUserName)) {
         sendMessage(message, "Usuário não existe no grupo")
@@ -272,6 +273,7 @@ object Manager {
           user.away = false
           user.sendMessage(Message("Você foi removido do grupo"))
           user.currentGroup = null
+          group.removePerson(user)
 
           sendMessage(message, user.nickname + " removido com sucessso")
         }
@@ -280,6 +282,11 @@ object Manager {
     } else {
       sendMessage(message, "Você deve pertencer a algum grupo para executar este comando")
     }
+  }
+
+  def gMsg(message: Message) = {
+    val group = message.user.currentGroup
+    group.sendMessage(message.user.nickname + ": " + message.message)
   }
 
 }

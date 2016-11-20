@@ -39,7 +39,7 @@ object Manager {
       case "/list" => if (m.length == 1) list(msg) else unrecognizedCommand(msg)
       case "/away" => if (m.length == 1) away(msg) else unrecognizedCommand(msg)
       case "/msg" => gMsg(msg)
-      case "/ban nick" => unrecognizedCommand(msg)
+      case "/ban" => if (m.length == 2) ban(msg) else unrecognizedCommand(msg)
       case "/kick nick" => unrecognizedCommand(msg)
       case "/clear" => unrecognizedCommand(msg)
       case _: String => unrecognizedCommand(msg)
@@ -161,9 +161,16 @@ object Manager {
 
       val groupName = split(1)
       if (groups.exists(group => group.groupName == groupName)) {
-        message.user.currentGroup = groups.filter(group => group.groupName == groupName)(0)
-        message.user.currentGroup.addPerson(message.user)
-        sendMessage(message, "Você está no grupo: " + groupName)
+        val group = groups.filter(group => group.groupName == groupName)(0)
+
+        if (group.userIsBlocked(message.user.nickname)) {
+          sendMessage(message, "Você está bloqueado neste grupo")
+        } else {
+          message.user.currentGroup = group
+          message.user.currentGroup.addPerson(message.user)
+          sendMessage(message, "Você está no grupo: " + groupName)
+        }
+
       } else {
         sendMessage(message, "Não existe grupo com este nome")
       }
@@ -212,6 +219,35 @@ object Manager {
           sendMessage(message, user.nickname + " não está disponível para receber mensagens")
         }
       }
+    } else {
+      sendMessage(message, "Você deve pertencer a algum grupo para executar este comando")
+    }
+  }
+
+  def ban(message: Message) = {
+    val group = message.user.currentGroup
+    if (group != null) {
+      val split = message.message.split(" ")
+      val banUserName = split(1)
+
+      if (group.admin != message.user) {
+        sendMessage(message, "Somente o administrador pode remover um usuário")
+      } else {
+
+        if (!group.userExist(banUserName)) {
+          sendMessage(message, "Usuário não existe no grupo")
+        } else {
+          val user = group.getUser(banUserName)
+          user.removeGroup(group)
+          user.away = false
+          user.sendMessage(Message("Você foi bonido do grupo"))
+          user.currentGroup = null
+          group.banUser(user)
+
+          sendMessage(message, user.nickname + " banido com sucessso")
+        }
+      }
+
     } else {
       sendMessage(message, "Você deve pertencer a algum grupo para executar este comando")
     }

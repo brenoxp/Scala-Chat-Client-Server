@@ -11,10 +11,11 @@ import scala.collection.mutable
   */
 case class Group(admin: User, groupName: String) {
 
-  private val users = mutable.MutableList[User]()
+  private var users = mutable.MutableList[User]()
   addPerson(admin)
 
   def addPerson(user: User) = users += user
+  def removePerson(user: User) = users = users.filterNot(mUser => mUser.nickname == user.nickname)
 
   def canBeRemoved = if (users.length == 1) true else false
 

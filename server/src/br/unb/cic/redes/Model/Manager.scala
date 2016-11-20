@@ -32,7 +32,7 @@ object Manager {
     m(0) match {
       case "/help" => if (m.length == 1) help(msg) else unrecognizedCommand(msg)
       case "/nick" => if (m.length <= 2) nick(msg) else unrecognizedCommand(msg)
-      case "/leave" => unrecognizedCommand(msg)
+      case "/leave" => if (m.length == 1) leave(msg) else unrecognizedCommand(msg)
       case "/join" => if (m.length == 2) join(msg) else unrecognizedCommand(msg)
       case "/create" => if (m.length == 2) create(msg) else unrecognizedCommand(msg)
       case "/delete" => if (m.length == 2) delete(msg) else unrecognizedCommand(msg)
@@ -99,7 +99,7 @@ object Manager {
       else if (users.exists(user => user.nickname == newNick)) sendMessage(message, "Nickname em uso")
       else {
         message.user.nickname = newNick
-        sendMessage(message, "Nickname alterado")
+        sendMessage(message, "Nickname alterado para: " + newNick)
       }
     }
   }
@@ -165,4 +165,17 @@ object Manager {
     }
   }
 
+  def leave(message: Message) = {
+    val currentGroup = message.user.currentGroup
+
+    if (currentGroup == null) {
+      // Leave chat
+      sendMessage(message, "Saindo...")
+    } else {
+      // Leave group
+      message.user.currentGroup = null
+      currentGroup.removePerson(message.user)
+      sendMessage(message, "Voce saiu do grupo: " + currentGroup.groupName)
+    }
+  }
 }

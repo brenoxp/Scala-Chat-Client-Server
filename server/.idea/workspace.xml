@@ -53,28 +53,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Manager.scala" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Manager.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/br/unb/cic/redes/Model/Manager.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="148" column="3" selection-start-line="148" selection-start-column="3" selection-end-line="148" selection-end-column="3" />
+            <state relative-caret-position="222">
+              <caret line="105" column="0" selection-start-line="105" selection-start-column="0" selection-end-line="105" selection-end-column="0" />
               <folding>
                 <element signature="e#32#73#0" expanded="true" />
-                <element signature="e#1888#1964#0" expanded="false" />
-                <element signature="e#1968#2132#0" expanded="false" />
-                <element signature="e#2158#3556#0" expanded="false" />
-                <element signature="e#3560#4237#0" expanded="false" />
-                <element signature="e#4830#5328#0" expanded="false" />
+                <element signature="e#1923#1999#0" expanded="false" />
+                <element signature="e#2003#2167#0" expanded="false" />
+                <element signature="e#2193#3591#0" expanded="false" />
+                <element signature="e#3595#4289#0" expanded="false" />
+                <element signature="e#4293#4878#0" expanded="false" />
+                <element signature="e#4882#5380#0" expanded="false" />
+                <element signature="e#5384#5910#0" expanded="false" />
+                <element signature="e#5914#6538#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Group.scala" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Group.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/br/unb/cic/redes/Model/models/Group.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+            <state relative-caret-position="375">
+              <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
               <folding>
                 <element signature="e#39#64#0" expanded="true" />
               </folding>
@@ -120,8 +123,8 @@
         <option value="$PROJECT_DIR$/src/br/unb/cic/redes/Model/models/Message.scala" />
         <option value="$PROJECT_DIR$/src/br/unb/cic/redes/Model/Main.scala" />
         <option value="$PROJECT_DIR$/src/br/unb/cic/redes/Model/models/User.scala" />
-        <option value="$PROJECT_DIR$/src/br/unb/cic/redes/Model/models/Group.scala" />
         <option value="$PROJECT_DIR$/src/br/unb/cic/redes/Model/Manager.scala" />
+        <option value="$PROJECT_DIR$/src/br/unb/cic/redes/Model/models/Group.scala" />
       </list>
     </option>
   </component>
@@ -728,11 +731,14 @@
           <caret line="129" column="56" selection-start-line="129" selection-start-column="56" selection-end-line="129" selection-end-column="56" />
           <folding>
             <element signature="e#32#73#0" expanded="true" />
-            <element signature="e#1888#1964#0" expanded="false" />
-            <element signature="e#1968#2132#0" expanded="false" />
-            <element signature="e#2158#3556#0" expanded="false" />
-            <element signature="e#3560#4237#0" expanded="false" />
-            <element signature="e#4830#5328#0" expanded="false" />
+            <element signature="e#1923#1999#0" expanded="false" />
+            <element signature="e#2003#2167#0" expanded="false" />
+            <element signature="e#2193#3591#0" expanded="false" />
+            <element signature="e#3595#4289#0" expanded="false" />
+            <element signature="e#4293#4878#0" expanded="false" />
+            <element signature="e#4882#5380#0" expanded="false" />
+            <element signature="e#5384#5910#0" expanded="false" />
+            <element signature="e#5914#6538#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -919,11 +925,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/br/unb/cic/redes/Model/Main.scala">
+    <entry file="file://$PROJECT_DIR$/src/br/unb/cic/redes/Model/Manager.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="30" column="3" selection-start-line="30" selection-start-column="3" selection-end-line="30" selection-end-column="3" />
-          <folding />
+        <state relative-caret-position="222">
+          <caret line="105" column="0" selection-start-line="105" selection-start-column="0" selection-end-line="105" selection-end-column="0" />
+          <folding>
+            <element signature="e#32#73#0" expanded="true" />
+            <element signature="e#1923#1999#0" expanded="false" />
+            <element signature="e#2003#2167#0" expanded="false" />
+            <element signature="e#2193#3591#0" expanded="false" />
+            <element signature="e#3595#4289#0" expanded="false" />
+            <element signature="e#4293#4878#0" expanded="false" />
+            <element signature="e#4882#5380#0" expanded="false" />
+            <element signature="e#5384#5910#0" expanded="false" />
+            <element signature="e#5914#6538#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -945,27 +961,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/br/unb/cic/redes/Model/models/Group.scala">
+    <entry file="file://$PROJECT_DIR$/src/br/unb/cic/redes/Model/Main.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding>
-            <element signature="e#39#64#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="405">
+          <caret line="30" column="3" selection-start-line="30" selection-start-column="3" selection-end-line="30" selection-end-column="3" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/br/unb/cic/redes/Model/Manager.scala">
+    <entry file="file://$PROJECT_DIR$/src/br/unb/cic/redes/Model/models/Group.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="148" column="3" selection-start-line="148" selection-start-column="3" selection-end-line="148" selection-end-column="3" />
+        <state relative-caret-position="375">
+          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
           <folding>
-            <element signature="e#32#73#0" expanded="true" />
-            <element signature="e#1888#1964#0" expanded="false" />
-            <element signature="e#1968#2132#0" expanded="false" />
-            <element signature="e#2158#3556#0" expanded="false" />
-            <element signature="e#3560#4237#0" expanded="false" />
-            <element signature="e#4830#5328#0" expanded="false" />
+            <element signature="e#39#64#0" expanded="true" />
           </folding>
         </state>
       </provider>

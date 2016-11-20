@@ -3,6 +3,7 @@ package br.unb.cic.redes.Model
 import br.unb.cic.redes.Model.models.User
 import br.unb.cic.redes.Model.models.Message
 import br.unb.cic.redes.Model.models.Group
+import br.unb.cic.redes.Model.models.Status
 
 import scala.collection.mutable.{ListBuffer, MutableList}
 
@@ -24,24 +25,25 @@ object Manager {
   private def addGroup(group: Group) = groups += group
   private def removeGroup(group: Group) = groups -= group
 
-  def receiveMessage(message: Message): Unit = {
-    val m = message.message.split(" ")
+  def receiveMessage(msg: Message): Unit = {
+    val m = msg.message.split(" ")
 
     if (m.isEmpty) return ()
 
     m(0) match {
-      case "/help" => help(message)
-      case "/nick" => if (m.length <= 2) nick(message) else unrecognizedCommand(message)
-      case "/leave" => ()
-      case "/join grupo" => ()
-      case "/create" => if (m.length == 2) create(message) else unrecognizedCommand(message)
-      case "/delete" => if (m.length == 2) delete(message) else unrecognizedCommand(message)
-      case "/away" => ()
-      case "/msg nick mensagem" => ()
-      case "/ban nick" => ()
-      case "/kick nick" => ()
-      case "/clear" => ()
-      case _: String => unrecognizedCommand(message)
+      case "/help" => if (m.length == 1) help(msg) else unrecognizedCommand(msg)
+      case "/nick" => if (m.length <= 2) nick(msg) else unrecognizedCommand(msg)
+      case "/leave" => unrecognizedCommand(msg)
+      case "/join grupo" => if (m.length == 2) join(msg) else unrecognizedCommand(msg)
+      case "/create" => if (m.length == 2) create(msg) else unrecognizedCommand(msg)
+      case "/delete" => if (m.length == 2) delete(msg) else unrecognizedCommand(msg)
+      case "/list" => if (m.length == 1) list(msg) else unrecognizedCommand(msg)
+      case "/away" => unrecognizedCommand(msg)
+      case "/msg nick mensagem" => unrecognizedCommand(msg)
+      case "/ban nick" => unrecognizedCommand(msg)
+      case "/kick nick" => unrecognizedCommand(msg)
+      case "/clear" => unrecognizedCommand(msg)
+      case _: String => unrecognizedCommand(msg)
     }
 
   }
@@ -56,7 +58,7 @@ object Manager {
 
   def welcomeHelp(message: Message) =  {
    val helpMessage = helpAux + "\n\n" +
-     "Seja muito bem-vindo a este Servidor\n"
+     "Seja muito bem-vindo a este Servidor"
     sendMessage(message, helpMessage)
   }
 
@@ -108,7 +110,7 @@ object Manager {
 
     val groupName = split(1)
     if (groupName.length > 50) sendMessage(message, "Nome do grupo deve ter até 50 caracteres")
-    else if(groups.exists(group => group.groupName == groupName)) sendMessage(message, "Nome do grupo em uso")
+    else if (groups.exists(group => group.groupName == groupName)) sendMessage(message, "Nome do grupo em uso")
     else {
       val group = Group(message.user, groupName)
       addGroup(group)
@@ -131,5 +133,31 @@ object Manager {
     }
   }
 
+  def list(message: Message) = {
+
+    val status = message.user.status
+
+    status match {
+      case Status.home => {
+        var groupNames = ""
+        groups.foreach(group => groupNames += group.groupName + "\n")
+        sendMessage(message, groupNames.substring(0, groupNames.length - 1))
+      }
+      case Status.group => {
+        //TODO: mostrar pessoas dentro do grupo
+      }
+    }
+  }
+
+  def join(message: Message) = {
+    val split = message.message.split(" ")
+
+    val groupName = split(1)
+    if (groups.exists(group => group.groupName == groupName)) {
+      sendMessage(message, "Grupo existe")
+    } else {
+      sendMessage(message, "Grupo fora de uso")
+    }
+  }
 
 }

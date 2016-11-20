@@ -13,15 +13,22 @@ import scala.util.control.Breaks._
 /**
   * Created by @brenoxp on 22/10/16.
   */
+
+object Status extends Enumeration {
+  val home, group = Value
+}
+
 case class User(var nickname: String, socket: Socket) {
 
   private val connectionActor = Main.system.actorOf(Props(new Connection(socket, this)))
+  var status = Status.home
 
   /* Groups */
   private val groups = ListBuffer[Group]()
 
   def addGroup(group: Group) = groups += group
   def removeGroup(group: Group) = groups -= group
+  var currentGroup: Group
 
   /* Connection Methods */
   def receiveMessage(message: Message) = Manager.receiveMessage(message)
@@ -49,11 +56,11 @@ class Connection(socket: Socket, user: User) extends Actor {
             val in = bufferedSource.getLines()
             val res = in.next()
 
-            if(res == "/leave") {
-              Manager.removeUser(user)
-              stopConnectionThread()
-              break
-            }
+//            if(res == "/leave") {
+//              Manager.removeUser(user)
+//              stopConnectionThread()
+//              break
+//            }
 
             user.receiveMessage(Message(res, user))
           }

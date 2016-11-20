@@ -17,6 +17,8 @@ case class Group(admin: User, groupName: String) {
   def addPerson(user: User) = users += user
 
   def canBeRemoved = if (users.length == 1) true else false
+
+  def getUsers: mutable.MutableList[User] = users
 }
 
 case class GroupMessage(user: User, message: String, date: Date)

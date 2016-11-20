@@ -56,8 +56,8 @@
       <file leaf-file-name="Manager.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/br/unb/cic/redes/Model/Manager.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="537">
-              <caret line="163" column="3" selection-start-line="163" selection-start-column="3" selection-end-line="163" selection-end-column="3" />
+            <state relative-caret-position="342">
+              <caret line="148" column="3" selection-start-line="148" selection-start-column="3" selection-end-line="148" selection-end-column="3" />
               <folding>
                 <element signature="e#32#73#0" expanded="true" />
                 <element signature="e#1888#1964#0" expanded="false" />
@@ -73,8 +73,8 @@
       <file leaf-file-name="Group.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/br/unb/cic/redes/Model/models/Group.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" column="18" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
+            <state relative-caret-position="285">
+              <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
               <folding>
                 <element signature="e#39#64#0" expanded="true" />
               </folding>
@@ -119,8 +119,8 @@
         <option value="$PROJECT_DIR$/src/br/unb/cic/redes/Model/Connection.scala" />
         <option value="$PROJECT_DIR$/src/br/unb/cic/redes/Model/models/Message.scala" />
         <option value="$PROJECT_DIR$/src/br/unb/cic/redes/Model/Main.scala" />
-        <option value="$PROJECT_DIR$/src/br/unb/cic/redes/Model/models/Group.scala" />
         <option value="$PROJECT_DIR$/src/br/unb/cic/redes/Model/models/User.scala" />
+        <option value="$PROJECT_DIR$/src/br/unb/cic/redes/Model/models/Group.scala" />
         <option value="$PROJECT_DIR$/src/br/unb/cic/redes/Model/Manager.scala" />
       </list>
     </option>
@@ -265,6 +265,32 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="models" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="models" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Group.scala" />
+              <option name="myItemType" value="org.jetbrains.plugins.scala.components.ScalaDefsProjectViewProvider$ScalaFileTreeNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -620,7 +646,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="906" y="22" width="997" height="1053" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32917964" sideWeight="0.49672592" order="6" side_tool="false" content_ui="tabs" />
@@ -893,16 +919,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/br/unb/cic/redes/Model/models/Group.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="18" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
-          <folding>
-            <element signature="e#39#64#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/br/unb/cic/redes/Model/Main.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="405">
@@ -929,10 +945,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/br/unb/cic/redes/Model/models/Group.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding>
+            <element signature="e#39#64#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/br/unb/cic/redes/Model/Manager.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="537">
-          <caret line="163" column="3" selection-start-line="163" selection-start-column="3" selection-end-line="163" selection-end-column="3" />
+        <state relative-caret-position="342">
+          <caret line="148" column="3" selection-start-line="148" selection-start-column="3" selection-end-line="148" selection-end-column="3" />
           <folding>
             <element signature="e#32#73#0" expanded="true" />
             <element signature="e#1888#1964#0" expanded="false" />

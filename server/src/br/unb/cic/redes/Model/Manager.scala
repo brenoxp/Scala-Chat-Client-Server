@@ -143,7 +143,8 @@ object Manager {
       sendMessage(message, groupNames.substring(0, groupNames.length - 1))
     } else {
       var userNames = "Usuários Cadastrados:\n"
-      //TODO: mostrar pessoas dentro do grupo
+      currentGroup.getUsers.foreach(user => userNames += user.nickname + "\n")
+      sendMessage(message, userNames.substring(0, userNames.length - 1))
     }
   }
 
@@ -156,6 +157,7 @@ object Manager {
       val groupName = split(1)
       if (groups.exists(group => group.groupName == groupName)) {
         message.user.currentGroup = groups.filter(group => group.groupName == groupName)(0)
+        message.user.currentGroup.addPerson(message.user)
         sendMessage(message, "Você está no grupo: " + groupName)
       } else {
         sendMessage(message, "Não existe grupo com este nome")

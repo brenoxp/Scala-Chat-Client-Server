@@ -24,6 +24,7 @@ case class User(var nickname: String, socket: Socket) {
   def addGroup(group: Group) = groups += group
   def removeGroup(group: Group) = groups -= group
   var currentGroup: Group = null
+  var away = false
 
   /* Connection Methods */
   def receiveMessage(message: Message) = Manager.receiveMessage(message)

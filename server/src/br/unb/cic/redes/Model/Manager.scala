@@ -37,8 +37,8 @@ object Manager {
       case "/create" => if (m.length == 2) create(msg) else unrecognizedCommand(msg)
       case "/delete" => if (m.length == 2) delete(msg) else unrecognizedCommand(msg)
       case "/list" => if (m.length == 1) list(msg) else unrecognizedCommand(msg)
-      case "/away" => unrecognizedCommand(msg)
-      case "/msg nick mensagem" => unrecognizedCommand(msg)
+      case "/away" => if (m.length == 1) away(msg) else unrecognizedCommand(msg)
+      case "/msg" => gMsg(msg)
       case "/ban nick" => unrecognizedCommand(msg)
       case "/kick nick" => unrecognizedCommand(msg)
       case "/clear" => unrecognizedCommand(msg)
@@ -123,7 +123,7 @@ object Manager {
     val groupName = message.message.split(" ")(1)
     val groupListToRemove = groups.filter(group => group.groupName == groupName)
 
-    if (groupListToRemove.length == 0) {
+    if (groupListToRemove.isEmpty) {
       sendMessage(message, "Grupo não existe")
     } else if (!groupListToRemove.head.canBeRemoved) {
       if (groupListToRemove.head.admin != message.user) {
@@ -184,4 +184,37 @@ object Manager {
       sendMessage(message, "Voce saiu do grupo: " + currentGroup.groupName)
     }
   }
+
+  def away(message: Message) = {
+    val group = message.user.currentGroup
+    if (group != null) {
+      message.user.away = true
+      group.sendMessage(message.user.nickname + " está indisponível")
+    } else {
+      sendMessage(message, "Você deve pertencer a algum grupo para executar este comando")
+    }
+  }
+
+  def gMsg(message: Message) = {
+    val group = message.user.currentGroup
+    if (group != null) {
+      val split = message.message.split(" ")
+      val destUserName = split(1)
+      val sendMessageText = split(2)
+
+      if (!group.userExist(destUserName)) {
+        sendMessage(message, "Usuário não existe no grupo")
+      } else {
+        val user = group.getUser(destUserName)
+        if (group.userCanReceiveMessage(destUserName)) {
+          user.sendMessage(Message("Mensagem privada de " + message.user.nickname + ": " + sendMessageText))
+        } else {
+          sendMessage(message, user.nickname + " não está disponível para receber mensagens")
+        }
+      }
+    } else {
+      sendMessage(message, "Você deve pertencer a algum grupo para executar este comando")
+    }
+  }
+
 }

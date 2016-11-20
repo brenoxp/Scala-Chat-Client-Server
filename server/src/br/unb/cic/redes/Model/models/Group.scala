@@ -17,9 +17,26 @@ case class Group(admin: User, groupName: String) {
   def addPerson(user: User) = users += user
   def removePerson(user: User) = users = users.filterNot(mUser => mUser.nickname == user.nickname)
 
-  def canBeRemoved = if (users.length == 0) true else false
+  def canBeRemoved = users.isEmpty
 
   def getUsers: mutable.MutableList[User] = users
+
+  def userExist(nickname: String) = users.exists(u => u.nickname == nickname)
+
+  def userCanReceiveMessage(nickname: String): Boolean = {
+    val userFound = users.find(u => u.nickname == nickname)
+
+    if (userFound.nonEmpty) {
+      return !userFound.get.away
+    }
+    false
+  }
+
+  def getUser(nickname: String) = users.find(u => u.nickname == nickname).get
+
+  def sendMessage(text: String) = {
+    users.foreach(user => user.sendMessage(Message(text)))
+  }
 }
 
 case class GroupMessage(user: User, message: String, date: Date)

@@ -64,7 +64,8 @@ object Manager {
     "Chat Redes de Computadores = versão 1.0\n" +
       MOTD + "\n" +
       "---------- Comandos disponíveis ----------\n" +
-      "/help ---------------------- Exibe esta tela de dajuda\n" +
+      "/help ---------------------- Exibe esta tela de ajuda\n" +
+      "/nick ---------------------- Mostra o nickname do usuário\n" +
       "/nick nome ----------------- Altera o nickname do usuário pelo parâmetro nome\n" +
       "/leave --------------------- Sai do ambiente atual para o anterior. Quando dentro de um Chat volta a tela inicial, na tela inicial sai do programa\n" +
       "/list ---------------------- Lista os grupos disponíveis no servidor. Dentro do Chat lista todos os usuários na conversa\n" +
@@ -83,6 +84,7 @@ object Manager {
   }
 
   private def nick(message: Message) = {
+    message.user.away = false
     val split = message.message.split(" ")
 
     if (split.length <= 1) printNick(message)
@@ -105,6 +107,7 @@ object Manager {
   }
 
   private def create(message: Message) = {
+    message.user.away = false
     val split = message.message.split(" ")
 
     val groupName = split(1)
@@ -120,6 +123,7 @@ object Manager {
   }
 
   def delete(message: Message) = {
+    message.user.away = false
     val groupName = message.message.split(" ")(1)
     val groupListToRemove = groups.filter(group => group.groupName == groupName)
 
@@ -139,7 +143,7 @@ object Manager {
   }
 
   def list(message: Message) = {
-
+    message.user.away = false
     val currentGroup = message.user.currentGroup
 
     if (currentGroup == null) {
@@ -154,6 +158,7 @@ object Manager {
   }
 
   def join(message: Message) = {
+    message.user.away = false
     if (message.user.currentGroup != null) {
       sendMessage(message, "Para entrar em outro grupo primeiro deve sair deste")
     } else {
@@ -180,6 +185,7 @@ object Manager {
   }
 
   def leave(message: Message) = {
+    message.user.away = false
     val currentGroup = message.user.currentGroup
 
     if (currentGroup == null) {
@@ -205,6 +211,7 @@ object Manager {
   }
 
   def pMsg(message: Message) = {
+    message.user.away = false
     val group = message.user.currentGroup
     if (group != null) {
       val split = message.message.split(" ")
@@ -227,6 +234,7 @@ object Manager {
   }
 
   def ban(message: Message) = {
+    message.user.away = false
     val group = message.user.currentGroup
     if (group != null) {
       val split = message.message.split(" ")
@@ -256,6 +264,7 @@ object Manager {
   }
 
   def kick(message: Message) = {
+    message.user.away = false
     val group = message.user.currentGroup
     if (group != null) {
       val split = message.message.split(" ")
@@ -285,6 +294,7 @@ object Manager {
   }
 
   def gMsg(message: Message) = {
+    message.user.away = false
     val group = message.user.currentGroup
     group.sendMessage(message.user.nickname + ": " + message.message)
   }
